@@ -10,6 +10,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout
 import android.widget.TextView
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DayPicker : LinearLayout {
@@ -194,6 +195,30 @@ class DayPicker : LinearLayout {
            it.value.isSelected = select
            it.value.configSelection(select)
         }
+    }
+
+    /**
+     * Selects specific days based upon their index.
+     *
+     * @param daysList list of day indices
+     */
+    fun selectDays(dayIndexList: ArrayList<Int>) {
+        dayIndexList.forEach { dayIndex ->
+            if(daysList.size > dayIndex) {
+                daysList[dayIndex].isSelected = true
+            }
+            if(textItemList.containsKey(dayIndex)) {
+                textItemList[dayIndex]?.isSelected = true
+                textItemList[dayIndex]?.configSelection(true)
+            }
+        }
+    }
+
+    /**
+     * Enable or disable this element.
+     */
+    fun enable(enable: Boolean) {
+        mIsEnabled = enable
     }
 
     /**
