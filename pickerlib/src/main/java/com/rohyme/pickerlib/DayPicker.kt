@@ -22,6 +22,7 @@ class DayPicker : LinearLayout {
     private var mTextSize = resources.getDimension(R.dimen.text_size)
     private var mTextSelectedColor = 0
     private var mTextUnSelectedColor = 0
+    private var mIsEnabled: Boolean = false
 
     constructor(context: Context) : super(context)
 
@@ -47,7 +48,7 @@ class DayPicker : LinearLayout {
     fun setAttrs(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.dayPicker, 0, 0)
         try {
-            isEnabled = typedArray.getBoolean(R.styleable.dayPicker_dp_enabled, true)
+            mIsEnabled = typedArray.getBoolean(R.styleable.dayPicker_dp_enabled, true)
             isSelectedByDefault = typedArray.getBoolean(R.styleable.dayPicker_dp_default_selection, true)
             selectedColor = typedArray.getInt(
                 R.styleable.dayPicker_dp_selected_color,
@@ -129,7 +130,7 @@ class DayPicker : LinearLayout {
             this.background = resources.getDrawable(R.drawable.day_bg)
             configSelection(day.isSelected)
             setOnClickListener {
-                if(!isEnabled) return@setOnClickListener
+                if(!mIsEnabled) return@setOnClickListener
 
                 day.isSelected = !day.isSelected
                 if (this@DayPicker::selectionListener.isInitialized) {
