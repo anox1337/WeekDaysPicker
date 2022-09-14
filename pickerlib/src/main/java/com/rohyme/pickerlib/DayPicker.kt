@@ -128,6 +128,8 @@ class DayPicker : LinearLayout {
             this.background = resources.getDrawable(R.drawable.day_bg)
             configSelection(day.isSelected)
             setOnClickListener {
+                if(!isEnabled) return@setOnClickListener
+
                 day.isSelected = !day.isSelected
                 if (this@DayPicker::selectionListener.isInitialized) {
                     selectionListener.onSelectedDaysChange(daysList, day)
