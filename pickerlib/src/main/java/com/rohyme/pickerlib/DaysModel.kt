@@ -17,6 +17,10 @@ data class DaysModel(
         var enDay: String = "",
         @SerializedName("enDayAbbrev")
         var enDayAbbrev: String = "",
+        @SerializedName("deDay")
+        var deDay: String = "",
+        @SerializedName("deDayAbbrev")
+        var deDayAbbrev: String = "",
         var isSelected :Boolean = true
     )
 }

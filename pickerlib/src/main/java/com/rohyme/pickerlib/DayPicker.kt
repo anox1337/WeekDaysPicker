@@ -2,16 +2,20 @@ package com.rohyme.pickerlib
 
 import android.content.Context
 import android.graphics.PorterDuff
+import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.LinearLayout
 import android.widget.TextView
+import java.util.*
+
 
 class DayPicker : LinearLayout {
 
     private var daysList: ArrayList<DaysModel.Day> = getData<DaysModel>(context, "days_list").days
+    private val textItemList = hashMapOf<Int, TextView>()
     private lateinit var selectionListener: DayPickerListener
     private var isSelectedByDefault: Boolean = true
     private var selectedColor: Int = ContextCompat.getColor(context, R.color.selected_color)
@@ -99,7 +103,7 @@ class DayPicker : LinearLayout {
     private fun initView() {
         val dayTextView = TextView(context)
         dayTextView.background = resources.getDrawable(R.drawable.day_bg)
-        val isArabic = resources.configuration.locale.language == "ar"
+        val currentLocale = getCurrentLocale(context)
         val containerWidth = measuredWidth
         val itemHeight = (containerWidth - (mSpaces * 6)) / daysList.size
         val params = layoutParams
@@ -109,12 +113,13 @@ class DayPicker : LinearLayout {
             day.isSelected = isSelectedByDefault
             val hasMargin = index != 0
             val dayItem = initText(day)
-            dayItem.setDayText(isArabic, day)
+            dayItem.setDayText(currentLocale, day)
             val textParams = LinearLayout.LayoutParams(0, MATCH_PARENT, 1f)
             if (hasMargin)
                 textParams.marginStart = mSpaces
             dayItem.layoutParams = textParams
             addView(dayItem)
+            textItemList[index] = dayItem
         }
     }
 
@@ -144,22 +149,18 @@ class DayPicker : LinearLayout {
 
     /**
      * Handle text displays in the each day item
-     * @param isArabic will set the day name in arabic
+     * @param locale used by the user
      */
-    private fun TextView.setDayText(isArabic: Boolean, day: DaysModel.Day) {
-        text = if (isArabic) {
-            if (isFullText) {
-                day.arDay
-            } else {
-                day.arDayAbbrev
-            }
-        } else {
-            if (isFullText) {
-                day.enDay
-            } else {
-                day.enDayAbbrev
-            }
+    private fun TextView.setDayText(locale: Locale, day: DaysModel.Day) {
+        val targetLang = locale.language.toLowerCase(Locale.ROOT)
+
+        text = when (targetLang) {
+            "ar" -> if(isFullText) day.arDay else day.arDayAbbrev
+            "en" -> if(isFullText) day.enDay else day.enDayAbbrev
+            "de" -> if(isFullText) day.deDay else day.deDayAbbrev
+            else -> "??"
         }
+
     }
 
 
@@ -176,6 +177,22 @@ class DayPicker : LinearLayout {
         }
         if (mTextColor != 0) {
             setTextColor(mTextColor)
+        }
+    }
+
+    /**
+     * Selects or deselects all days.
+     *
+     * @param select or deselect all
+     */
+    fun selectAll(select : Boolean) {
+        daysList.forEach {
+            it.isSelected = select
+        }
+
+        textItemList.forEach {
+           it.value.isSelected = select
+           it.value.configSelection(select)
         }
     }
 
@@ -200,5 +217,13 @@ class DayPicker : LinearLayout {
 
     fun setOnSelectListener(dayPickerListener: DayPickerListener) {
         this.selectionListener = dayPickerListener
+    }
+
+    private fun getCurrentLocale(context: Context): Locale {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            context.resources.configuration.locales[0]
+        } else {
+            context.resources.configuration.locale
+        }
     }
 }

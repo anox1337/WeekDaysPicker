@@ -5,43 +5,57 @@
       "arDay": "الأحد",
       "enDay": "Sunday",
       "arDayAbbrev": "اح",
-      "enDayAbbrev": "Sun"
+      "enDayAbbrev": "Sun",
+      "deDay": "Sonntag",
+      "deDayAbbrev": "So"
     }, {
       "dayID": 2,
       "arDay": "الأثنين",
       "enDay": "Monday",
       "arDayAbbrev": "اث",
-      "enDayAbbrev": "Mon"
+      "enDayAbbrev": "Mon",
+      "deDay": "Montag",
+      "deDayAbbrev": "Mo"
     }, {
       "dayID": 3,
       "arDay": "الثلاثاء",
       "enDay": "Tuesday",
       "arDayAbbrev": "ثل",
-      "enDayAbbrev": "Tue"
+      "enDayAbbrev": "Tue",
+      "deDay": "Dienstag",
+      "deDayAbbrev": "Di"
     }, {
       "dayID": 4,
       "arDay": "الأربعاء",
       "enDay": "Wednesday",
       "arDayAbbrev": "ار",
-      "enDayAbbrev": "Wed"
+      "enDayAbbrev": "Wed",
+      "deDay": "Mittwoch",
+      "deDayAbbrev": "Mi"
     }, {
       "dayID": 5,
       "arDay": "الخميس",
       "enDay": "Thursday",
       "arDayAbbrev": "خم",
-      "enDayAbbrev": "Thu"
+      "enDayAbbrev": "Thu",
+      "deDay": "Donnerstag",
+      "deDayAbbrev": "Do"
     }, {
       "dayID": 6,
       "arDay": "الجمعة",
       "enDay": "Friday",
       "arDayAbbrev": "جم",
-      "enDayAbbrev": "Fri"
+      "enDayAbbrev": "Fri",
+      "deDay": "Freitag",
+      "deDayAbbrev": "Fr"
     }, {
       "dayID": 7,
       "arDay": "السبت",
       "enDay": "Saturday",
       "arDayAbbrev": "سب",
-      "enDayAbbrev": "Sat"
+      "enDayAbbrev": "Sat",
+      "deDay": "Samstag",
+      "deDayAbbrev": "Sa"
     }
   ]
 }
