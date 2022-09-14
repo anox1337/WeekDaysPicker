@@ -47,6 +47,7 @@ class DayPicker : LinearLayout {
     fun setAttrs(attrs: AttributeSet?) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.dayPicker, 0, 0)
         try {
+            isEnabled = typedArray.getBoolean(R.styleable.dayPicker_dp_enabled, true)
             isSelectedByDefault = typedArray.getBoolean(R.styleable.dayPicker_dp_default_selection, true)
             selectedColor = typedArray.getInt(
                 R.styleable.dayPicker_dp_selected_color,
