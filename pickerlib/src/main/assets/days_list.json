@@ -1,14 +1,6 @@
 {
   "days": [
-    {
-      "dayID": 6,
-      "arDay": "الأحد",
-      "enDay": "Sunday",
-      "arDayAbbrev": "اح",
-      "enDayAbbrev": "Sun",
-      "deDay": "Sonntag",
-      "deDayAbbrev": "So"
-    }, {
+ {
       "dayID": 0,
       "arDay": "الأثنين",
       "enDay": "Monday",
@@ -56,6 +48,15 @@
       "enDayAbbrev": "Sat",
       "deDay": "Samstag",
       "deDayAbbrev": "Sa"
+    },
+    {
+      "dayID": 6,
+      "arDay": "الأحد",
+      "enDay": "Sunday",
+      "arDayAbbrev": "اح",
+      "enDayAbbrev": "Sun",
+      "deDay": "Sonntag",
+      "deDayAbbrev": "So"
     }
   ]
 }
